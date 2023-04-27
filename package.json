@@ -1,0 +1,86 @@
+{
+  "name": "time-recorder",
+  "version": "0.1.1",
+  "private": true,
+  "scripts": {
+    "start": "react-scripts start",
+    "start:no-browser": "set BROWSER=none && react-scripts start",
+    "test": "react-scripts test",
+    "show:css-size": "dir src\\*.css && dir work\\*.css",
+    "dev:build:css:stock": "postcss src/style.css -o work/post.css",
+    "dev:replace:css:from-stock": "copy work\\post.css src\\post.css",
+    "dev:build:tailwind": "tailwindcss -i ./src/style.css -o ./src/post.css",
+    "dev:build:tailwind:watch": "tailwindcss -i ./src/style.css -o ./src/post.css --watch",
+    "dev:build:tailwind-prod": "set NODE_ENV=production tailwindcss build src/style.css -o src/post.css",
+    "version-up-minor": "node release/version-up.js",
+    "build:css": "postcss src/style.css -o src/post.css",
+    "build:css-prod": "set NODE_ENV=production postcss src/style.css -o src/post.css",
+    "build:react": "react-scripts build",
+    "build:404": "copy build\\index.html build\\404.html",
+    "deploy": "gh-pages -d build",
+    "build-deploy": "npm run build:react && npm run deploy",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.16.4",
+    "@testing-library/react": "^13.3.0",
+    "@testing-library/user-event": "^14.3.0",
+    "@types/jest": "^28.1.6",
+    "@types/node": "^18.0.6",
+    "@types/react": "^18.0.15",
+    "@types/react-dom": "^18.0.6",
+    "date-fns": "^2.29.1",
+    "jotai": "^1.7.6",
+    "react": "^18.2.0",
+    "react-copy-to-clipboard": "^5.0.3",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.3.0",
+    "react-scripts": "5.0.1",
+    "typescript": "^4.7.4",
+    "web-vitals": "^2.1.4",
+    "workbox-background-sync": "^6.5.3",
+    "workbox-broadcast-update": "^6.5.3",
+    "workbox-cacheable-response": "^6.5.3",
+    "workbox-core": "^6.5.3",
+    "workbox-expiration": "^6.5.3",
+    "workbox-google-analytics": "^6.5.3",
+    "workbox-navigation-preload": "^6.5.3",
+    "workbox-precaching": "^6.5.3",
+    "workbox-range-requests": "^6.5.3",
+    "workbox-routing": "^6.5.3",
+    "workbox-strategies": "^6.5.3",
+    "workbox-streams": "^6.5.3"
+  },
+  "devDependencies": {
+    "@types/": "testing-library/user-event",
+    "@types/react-copy-to-clipboard": "^5.0.0",
+    "@types/react-router-dom": "^5.3.3",
+    "autoprefixer": "^10.2.5",
+    "fast-xml-parser": "^3.19.0",
+    "gh-pages": "^4.0.0",
+    "he": "^1.2.0",
+    "postcss": "^8.2.15",
+    "postcss-cli": "^8.3.1",
+    "react-redux": "^8.0.2",
+    "tailwind": "^4.0.0",
+    "tailwindcss": "^3.1.5"
+  }
+}
