@@ -1,6 +1,6 @@
 {
-  "short_name": "seikyo",
-  "name": "seikyo",
+  "short_name": "time-recorder",
+  "name": "time-recorder",
   "icons": [
     {
       "src": "icon-192x192.png",
