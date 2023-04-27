@@ -14,7 +14,7 @@ export const TimeList: React.FC<{
 
   return (
     <div id="time-list" className="border rounded my-2 py-2">
-      <div className="p-2 flex justify-between">
+      <div className="p-2 flex justify-between text-2xl">
         <span>時刻一覧({timesView.length}件)</span>
       </div>
       <button className="bg-red-900 p-2 m-1 rounded " onClick={() => deleteAll()}>
