@@ -23,6 +23,6 @@ const version = readVer()
 
 const contextSw = read(FILE_SW)
 const newStr = contextSw.replace(/ver: ([\d\.]+)/, "ver: " + version)
-console.log('newStr', newStr);
+// console.log('newStr', newStr);
 
-// write(FILE_SW, newStr)
+write(FILE_SW, newStr)
