@@ -1,4 +1,4 @@
-import { format } from "date-fns"
+import { format, parseISO } from "date-fns"
 import { Time } from "../types"
 
 export const TimeLabel: React.FC<{
@@ -10,20 +10,21 @@ export const TimeLabel: React.FC<{
 
   const _format = (time: Time, formatStyle: string) => {
     if (!time) return ""
+    if (typeof time === "string") time = parseISO(time)
     try {
       return format(time, formatStyle)
     } catch (error) {
       console.error("df.format error", error)
+      console.error("value=" ,time)
       return ""
     }
   }
   return (
     <>
       {time !== undefined && time !== null ? (
-        <>
-          {/* <span className="hours-label text-gray-300">{time && _format(time, "MM-dd")}</span>&nbsp; */}
-          <span className="hours-label text-2xl">{time && _format(time, "HH:mm")}</span>
-        </>
+        <div className="w-full text-center">
+          <span className="text-2xl ">{time && _format(time, "HH:mm:ss")}</span>
+        </div>
       ) : (
         <span></span>
       )}
