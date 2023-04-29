@@ -1,38 +1,45 @@
 import pkg from "../../package.json"
-import { Time, TimeView } from "../types"
+import { NowStylePattern, Time, TimeView } from "../types"
 import { TimeList } from "./TimeList"
 import { atomWithStorage } from "jotai/utils"
 import { atom, useAtom, useSetAtom, useAtomValue } from "jotai"
 import { Now } from "./Now"
 
 export const timesState = atomWithStorage<TimeView[]>("times", [])
+export const nowStyleState = atomWithStorage<NowStylePattern>("nowStyle", "style1")
 
 const Main: React.FC<{ lang: string }> = ({ lang }) => {
   console.log("render Main")
 
   const [times, setTimes] = useAtom(timesState)
+  const [nowStyle , setNowStyle] = useAtom(nowStyleState)
 
   const handleRecord = () => {
     const item = {
       id: "time_" + Date.now(),
-      time: new Date()
+      time: new Date(),
     }
-    setTimes(times => times.concat([item]))
+    setTimes((times) => times.concat([item]))
   }
-
 
   const handleOnclickDel = (time: TimeView) => {
     setTimes(times.filter((i) => i.id !== time.id))
   }
 
+  const handleOnclickNow = () => {
+    if (nowStyle === "style1") setNowStyle("style2")
+    if (nowStyle === "style2") setNowStyle("style1")
+  }
+
   return (
     <div className="App p-5">
-      <h1 className="text-3xl p-1 text-center" id="title">
-        タイムレコーダー
-      </h1>
-      <span>ver {pkg.version}</span>
-
-      <Now></Now>
+      <div id="title" className="flex items-center text-xs">
+        <h1 className="p-1 text-center" id="title">
+          タイムレコーダー
+        </h1>
+        <span>ver {pkg.version}</span>
+      </div>
+      <Now stylePattern={nowStyle} onClick={handleOnclickNow}></Now>
       <TimeList timesView={times} onClickDel={handleOnclickDel}></TimeList>
 
       <button id="btn-record" className="bg-red-900 p-2 m-1 rounded w-full" onClick={handleRecord}>

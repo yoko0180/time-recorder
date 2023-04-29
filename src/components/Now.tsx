@@ -1,8 +1,11 @@
 import { format, parseISO } from "date-fns"
-import { Time } from "../types"
+import { NowStylePattern, Time } from "../types"
 import { useEffect, useState } from "react"
 import { ja } from "date-fns/locale"
-export const Now: React.FC = () => {
+export const Now: React.FC<{
+  stylePattern: NowStylePattern
+  onClick: React.MouseEventHandler
+}> = ({ stylePattern, onClick }) => {
   const _format = (time: Time, formatStyle: string) => {
     if (!time) return ""
     if (typeof time === "string") time = parseISO(time)
@@ -28,8 +31,20 @@ export const Now: React.FC = () => {
   }, [])
 
   return (
-    <div id="now" className="w-full text-center">
-      <span className="">{_format(now, "MM/dd eee HH:mm:ss")}</span>
+    <div id="now" className="w-full  m-0 p-0" onClick={onClick}>
+      {stylePattern === "style1" && (
+        <div className="text-center" style={{ fontSize: "2em" }}>
+          {_format(now, "MM/dd eee HH:mm:ss")}
+        </div>
+      )}
+      {stylePattern === "style2" && (
+        <div className="mt-8">
+          <div className="date" style={{ fontSize: "6vmin" }}>{_format(now, "MM/dd eee")}</div>
+          <div className="time text-center" style={{ fontSize: "20vmin" }}>
+            {_format(now, "HH:mm:ss")}
+          </div>
+        </div>
+      )}
     </div>
   )
 }

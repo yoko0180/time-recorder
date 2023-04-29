@@ -5,3 +5,4 @@ export type TimeView = {
   id: string
   time: Time
 }
+export type NowStylePattern = "style1" | "style2"
