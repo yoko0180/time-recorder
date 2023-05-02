@@ -44,7 +44,7 @@ const Main: React.FC<{ lang: string }> = ({ lang }) => {
   return (
     <div className="App p-5">
       <div id="title" className="flex items-center text-xs">
-        <h1 className="p-1 text-center" id="title">
+        <h1 className="p-1 text-center" >
           タイムレコーダー
         </h1>
         <span>ver {pkg.version}</span>

@@ -24,7 +24,7 @@ export const TimeList: React.FC<{
       {addedFlg && (
 
       <div id="added-flg" className="animate-bounce float-right" >
-        added !
+        打刻!
       </div>
 
       )}
