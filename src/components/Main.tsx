@@ -7,12 +7,17 @@ import { Now } from "./Now"
 
 export const timesState = atomWithStorage<TimeView[]>("times", [])
 export const nowStyleState = atomWithStorage<NowStylePattern>("nowStyle", "style1")
+// 追加モーションのためのフラグ
+// タイマーでフラグ倒して非表示にすることで一時的なハイライト表示に利用
+// 一時的にtrueにすることで常時表示させてCSS調整などする
+export const addedFlgState = atom(false) 
 
 const Main: React.FC<{ lang: string }> = ({ lang }) => {
   console.log("render Main")
 
   const [times, setTimes] = useAtom(timesState)
   const [nowStyle , setNowStyle] = useAtom(nowStyleState)
+  const [addedFlg , setAddedFlg] = useAtom(addedFlgState)
 
   const handleRecord = () => {
     const item = {
@@ -20,6 +25,11 @@ const Main: React.FC<{ lang: string }> = ({ lang }) => {
       time: new Date(),
     }
     setTimes((times) => times.concat([item]))
+
+    setAddedFlg(true)
+    setTimeout(() => {
+      setAddedFlg(false)
+    }, 2000);
   }
 
   const handleOnclickDel = (time: TimeView) => {

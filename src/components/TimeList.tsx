@@ -1,13 +1,14 @@
 import { useAtom } from "jotai"
 import { TimeView } from "../types"
 import { TimeLabel } from "./Labels"
-import { timesState } from "./Main"
+import { addedFlgState, timesState } from "./Main"
 
 export const TimeList: React.FC<{
   timesView: TimeView[]
   onClickDel: (time: TimeView) => void
 }> = ({ timesView, onClickDel }) => {
   const [times, setTimes] = useAtom(timesState)
+  const [addedFlg , setAddedFlg] = useAtom(addedFlgState)
   const deleteAll = () => {
     setTimes([])
   }
@@ -18,8 +19,15 @@ export const TimeList: React.FC<{
         <span>時刻一覧({timesView.length}件)</span>
       </div>
       <button className="bg-red-900 p-2 m-1 rounded " onClick={() => deleteAll()}>
-      全件削除
+        全件削除
       </button>
+      {addedFlg && (
+
+      <div id="added-flg" className="animate-bounce float-right" >
+        added !
+      </div>
+
+      )}
       {timesView.map((time) => {
         return (
           <div key={time.id} className="m-2 border rounded flex items-center ">
