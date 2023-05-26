@@ -52,7 +52,7 @@ const Main: React.FC<{ lang: string }> = ({ lang }) => {
       <Now stylePattern={nowStyle} onClick={handleOnclickNow}></Now>
       <TimeList timesView={times} onClickDel={handleOnclickDel}></TimeList>
 
-      <button id="btn-record" className="bg-red-900 p-2 m-1 rounded w-full" onClick={handleRecord}>
+      <button id="btn-record" className="bg-red-900 p-2 m-1 rounded w-full" onPointerDown={handleRecord}>
         打刻
       </button>
       <div className="three wide column text-left mt-5">© 2023</div>
