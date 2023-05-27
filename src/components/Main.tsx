@@ -4,6 +4,7 @@ import { TimeList } from "./TimeList"
 import { atomWithStorage } from "jotai/utils"
 import { atom, useAtom, useSetAtom, useAtomValue } from "jotai"
 import { Now } from "./Now"
+import { useState } from "react"
 
 export const timesState = atomWithStorage<TimeView[]>("times", [])
 export const nowStyleState = atomWithStorage<NowStylePattern>("nowStyle", "style1")
@@ -19,6 +20,8 @@ const Main: React.FC<{ lang: string }> = ({ lang }) => {
   const [nowStyle , setNowStyle] = useAtom(nowStyleState)
   const [addedFlg , setAddedFlg] = useAtom(addedFlgState)
 
+  const [timeoutid , setTimeoutid] = useState<NodeJS.Timeout>()
+
   const handleRecord = () => {
     const item = {
       id: "time_" + Date.now(),
@@ -26,10 +29,12 @@ const Main: React.FC<{ lang: string }> = ({ lang }) => {
     }
     setTimes((times) => times.concat([item]))
 
+    if (timeoutid) clearTimeout(timeoutid)
     setAddedFlg(true)
-    setTimeout(() => {
+    const t = setTimeout(() => {
       setAddedFlg(false)
     }, 2000);
+    setTimeoutid(t)
   }
 
   const handleOnclickDel = (time: TimeView) => {
