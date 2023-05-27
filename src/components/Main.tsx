@@ -13,6 +13,24 @@ export const nowStyleState = atomWithStorage<NowStylePattern>("nowStyle", "style
 // 一時的にtrueにすることで常時表示させてCSS調整などする
 export const addedFlgState = atom(false) 
 
+/**
+ * 配慮ポイント
+ * 
+ * 
+ * 打刻ボタン
+ * 
+ * ユーザーや端末が多少揺れている状況でも反応しやすくする
+ * かつ、ぶれなどで意図せず連続で処理させないようにする
+ * 打刻を視覚化エフェクトで例えば２秒間表示させることに合わせて、
+ * その時間内はボタンを無効化しておく
+ * 
+ * [処理方式]
+ * buttonタグのdisableを設定しただけではpointerdownイベントを無効化できないので
+ * 打刻エフェクト用のフラグを参照してフラグが有効でエフェクト表示させている間は打刻処理をしないよう制御する
+ * bisabledを設定しないと処理は無効にできていてもボタン表示が反転のようにクリック感がでてしまうので
+ * pointerdownイベントの無効化することはできないが設定をする
+ * disabledを設定してもボタン表示が無効とわかる視覚表現がされないのでそれ用のcss設定もする
+ */
 const Main: React.FC<{ lang: string }> = ({ lang }) => {
   console.log("render Main")
 
@@ -23,6 +41,9 @@ const Main: React.FC<{ lang: string }> = ({ lang }) => {
   const [timeoutid , setTimeoutid] = useState<NodeJS.Timeout>()
 
   const handleRecord = () => {
+    // 打刻処理しましたエフェクト表示中は処理をしない
+    if (addedFlg) return
+
     const item = {
       id: "time_" + Date.now(),
       time: new Date(),
@@ -57,7 +78,10 @@ const Main: React.FC<{ lang: string }> = ({ lang }) => {
       <Now stylePattern={nowStyle} onClick={handleOnclickNow}></Now>
       <TimeList timesView={times} onClickDel={handleOnclickDel}></TimeList>
 
-      <button id="btn-record" className="bg-red-900 p-2 m-1 rounded w-full" onPointerDown={handleRecord}>
+      <button id="btn-record"
+        disabled={addedFlg}
+        className={"bg-red-900 p-2 m-1 rounded w-full" + (addedFlg ? " disabled" : "")}
+        onPointerDown={handleRecord}>
         打刻
       </button>
       <div className="three wide column text-left mt-5">© 2023</div>

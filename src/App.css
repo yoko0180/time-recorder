@@ -110,5 +110,7 @@ body {
         box-shadow: none;
     }    
 }
-
+.disabled {
+  opacity: .5;
+}
 
