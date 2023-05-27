@@ -12,7 +12,7 @@
     "dev:build:tailwind": "tailwindcss -i ./src/style.css -o ./src/post.css",
     "dev:build:tailwind:watch": "tailwindcss -i ./src/style.css -o ./src/post.css --watch",
     "dev:build:tailwind-prod": "set NODE_ENV=production tailwindcss build src/style.css -o src/post.css",
-    "version": "node release/version-up.js",
+    "version": "node release/version-up.js && npm run build-deploy",
     "postversion": "git push && git push --tags",
     "build:css": "postcss src/style.css -o src/post.css",
     "build:css-prod": "set NODE_ENV=production postcss src/style.css -o src/post.css",
