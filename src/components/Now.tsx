@@ -39,7 +39,7 @@ export const Now: React.FC<{
       )}
       {stylePattern === "style2" && (
         <div className="mt-8">
-          <div className="date" style={{ fontSize: "6vmin" }}>{_format(now, "MM/dd eee")}</div>
+          <div className="date" style={{ fontSize: "6vmin" }}>{_format(now, "yyyy/MM/dd eee")}</div>
           <div className="time text-center" style={{ fontSize: "20vmin" }}>
             {_format(now, "HH:mm:ss")}
           </div>
