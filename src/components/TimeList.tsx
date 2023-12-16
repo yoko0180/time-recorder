@@ -1,4 +1,4 @@
-import { useAtom } from "jotai"
+import { useSetAtom, useAtomValue } from "jotai"
 import { TimeView } from "../types"
 import { TimeLabel } from "./Labels"
 import { addedFlgState, timesState } from "./Main"
@@ -7,8 +7,8 @@ export const TimeList: React.FC<{
   timesView: TimeView[]
   onClickDel: (time: TimeView) => void
 }> = ({ timesView, onClickDel }) => {
-  const [times, setTimes] = useAtom(timesState)
-  const [addedFlg , setAddedFlg] = useAtom(addedFlgState)
+  const setTimes = useSetAtom(timesState)
+  const addedFlg = useAtomValue(addedFlgState)
   const deleteAll = () => {
     setTimes([])
   }

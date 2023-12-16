@@ -1,8 +1,8 @@
 import pkg from "../../package.json"
-import { NowStylePattern, Time, TimeView } from "../types"
+import { NowStylePattern, TimeView } from "../types"
 import { TimeList } from "./TimeList"
 import { atomWithStorage } from "jotai/utils"
-import { atom, useAtom, useSetAtom, useAtomValue } from "jotai"
+import { atom, useAtom } from "jotai"
 import { Now } from "./Now"
 import { useState } from "react"
 

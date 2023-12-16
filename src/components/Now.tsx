@@ -19,7 +19,7 @@ export const Now: React.FC<{
 
   const [now, setNow] = useState(new Date())
   useEffect(() => {
-    let timeoutId
+    // let timeoutId
     const updateNow = () => {
       setNow(new Date())
       setTimeout(updateNow, 1000)
