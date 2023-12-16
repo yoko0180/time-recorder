@@ -3,7 +3,8 @@ import { Time } from "../types"
 
 export const TimeLabel: React.FC<{
   time: Time
-}> = ({ time }) => {
+  viewDate: boolean
+}> = ({ time, viewDate }) => {
   if (!time) {
     return <></>
   }
@@ -19,11 +20,14 @@ export const TimeLabel: React.FC<{
       return ""
     }
   }
+
+  const formatStyle = viewDate ? "yyyy/MM/dd (E) HH:mm:ss" : "HH:mm:ss"
+
   return (
     <>
       {time !== undefined && time !== null ? (
         <div className="w-full text-center">
-          <span className="text-2xl ">{time && _format(time, "HH:mm:ss")}</span>
+          <span className="text-2xl ">{time && _format(time, formatStyle)}</span>
         </div>
       ) : (
         <span></span>

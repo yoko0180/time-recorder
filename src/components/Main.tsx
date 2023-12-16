@@ -5,6 +5,7 @@ import { atomWithStorage } from "jotai/utils"
 import { atom, useAtom } from "jotai"
 import { Now } from "./Now"
 import { useState } from "react"
+import { useEffect } from "react"
 
 export const timesState = atomWithStorage<TimeView[]>("times", [])
 export const nowStyleState = atomWithStorage<NowStylePattern>("nowStyle", "style1")
@@ -39,6 +40,18 @@ const Main: React.FC<{ lang: string }> = ({ lang }) => {
   const [addedFlg , setAddedFlg] = useAtom(addedFlgState)
 
   const [timeoutid , setTimeoutid] = useState<NodeJS.Timeout>()
+
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      // ここに10分ごとに実行したい処理を書く
+    }, 600000); // 600000ミリ秒は10分
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
+
 
   const handleRecord = () => {
     // 打刻処理しましたエフェクト表示中は処理をしない
